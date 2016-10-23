@@ -24,68 +24,46 @@ var model = 'https://api.projectoxford.ai/luis/v1/application?id=27980a6e-ec18-4
 // Main dialog with LUIS
 var recognizer = new builder.LuisRecognizer(LuisModelUrl);
 var intents = new builder.IntentDialog({ recognizers: [recognizer] })
-    .matches('FindActivity', [
-        function (session, args, next) {
-         
 
-            // try extracting entities
-            var cityEntity = builder.EntityRecognizer.findEntity(args.entities, 'location');
-           
-            if (cityEntity) {
-                // city entity detected, continue to next step
-                session.dialogData.searchType = 'location';
-                next({ response: cityEntity.entity });
-            }  else {
-                // no entities detected, ask user for a destination
-                builder.Prompts.text(session, 'Could not detect a location');
-            }
-        },
-        function (session, results) {
-            var destination = results.response;
 
-            var message = 'Looking for carpark';
-            if (session.dialogData.searchType === 'airport') {
-                message += ' near %s airport...';
-            } else {
-                message += ' in %s...';
-            }
+intents.onBegin(function (session, args, next) {
+    session.dialogData.name = args.name;
+    session.send("Hi %s...", args.name);
+    next();
+});
 
-            session.send(message, destination);
 
-            var message = new builder.Message()
-                        .attachmentLayout(builder.AttachmentLayout.carousel)
-                        .attachments(cityEntity.map(hotelAsAttachment));
-
-                    session.send(message);
-
-                    // End
-                    session.endDialog();
-
-            
+intents.matches('FindActivity', [
+    function (session, args, next) {
+        // Process optional entities received from LUIS
+        var match;
+        var entity = builder.EntityRecognizer.findEntity(args.entities, 'car park');
+        if (entity) {
+            match = builder.EntityRecognizer.findBestMatch(tasks, entity.entity);
         }
-    ])
+        
+        // Prompt for task name
+        if (!match) {
+            builder.Prompts.choice(session, "Cannot intepret", tasks);
+        } else {
+            next({ response: match });
+        }
+    },
+    function (session, results) {
+        if (results.response) {
+           
+            session.send("The nearest car park is TP21.");
+        } else {
+            session.send('Could not find any car park near you');
+        }
+    }
+]);
+
+
+
 
   
-    .onDefault((session) => {
-        session.send('Sorry, I did not understand \'%s\'. ', session.message.text);
-    });
+intents.onDefault(builder.DialogAction.send("I'm sorry. I didn't understand."));
 
 bot.dialog('/', intents);
 
-// Helpers
-function hotelAsAttachment(hotel) {
-    return new builder.HeroCard()
-        .buttons([
-            new builder.CardAction()
-                .title('More details')
-                .type('openUrl')
-                .value('https://www.bing.com/search?q=' + encodeURIComponent(cityEntity.location))
-        ]);
-}
-
-function reviewAsAttachment(review) {
-    return new builder.ThumbnailCard()
-        .title(review.title)
-        .text(review.text)
-        .images([new builder.CardImage().url(review.image)])
-}
