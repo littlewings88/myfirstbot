@@ -44,7 +44,7 @@ var style = builder.ListStyle["button"];
 var model = 'https://api.projectoxford.ai/luis/v1/application?id=27980a6e-ec18-4fa5-bc3f-8a031eb74f4c&subscription-key=a5c9c598a1864e928073f34258f04e27';
 // Main dialog with LUIS
 var recognizer = new builder.LuisRecognizer(model);
-var intents = new builder.IntentDialog({ recognizers: [recognizer] })
+var intents = new builder.IntentDialog({ recognizers: [recognizer] });
 
 intents.matches(/^hello|hi/i, [
     function (session) {
