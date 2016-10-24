@@ -60,19 +60,9 @@ intents.matches('FindActivity', [
            
             session.send("The nearest car park is TP21.");
 
-            var message = new builder.HeroCard()
-										.title('TP21')
-										.buttons([
-											new builder.CardAction()
-												.title('More details')
-												.type('openUrl')
-												.value('https://maps.google.com/q=HDB+HUB')]);
+            var message = createHeroCard(session);
         
-
-                         
-            
-
-                    session.send(message);
+            session.send(message);
 
 
         } else {
@@ -89,3 +79,22 @@ intents.onDefault(function (session) {
 
 bot.dialog('/', intents);
 
+function createHeroCard(session) {
+    return new builder.HeroCard(session)
+        .title('BotFramework Hero Card')
+        .subtitle('Your bots — wherever your users are talking')
+        .text('Build and connect intelligent bots to interact with your users naturally wherever they are, from text/sms to Skype, Slack, Office 365 mail and other popular services.')
+        .images(getSampleCardImages(session))
+        .buttons(getSampleCardActions(session));
+}
+
+function getSampleCardImages(session) {
+    return [
+        builder.CardImage.create(session, 'https://sec.ch9.ms/ch9/7ff5/e07cfef0-aa3b-40bb-9baa-7c9ef8ff7ff5/buildreactionbotframework_960.jpg')
+    ];
+}
+function getSampleCardActions(session) {
+    return [
+        builder.CardAction.openUrl(session, 'https://maps.google.com/?q=HDB+HUB', 'Get Location')
+    ];
+}
