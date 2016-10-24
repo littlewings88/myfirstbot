@@ -68,7 +68,7 @@ intents.onBegin(function (session, args, next) {
 });
 
 
-intents.matches('FindActivity', [
+/*intents.matches('FindActivity', [
     function (session, args, next) {
         // Process optional entities received from LUIS
         var match;
@@ -94,7 +94,7 @@ intents.matches('FindActivity', [
     }
 ]);
 
-
+*/
 
 
   
