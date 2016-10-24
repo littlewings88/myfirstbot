@@ -19,11 +19,46 @@ var connector = new builder.ChatConnector({
 var bot = new builder.UniversalBot(connector);
 server.post('/api/messages', connector.listen());
 
+bot.on('contactRelationUpdate', function (message) {
+    if (message.action === 'add') {
+        var name = message.user ? message.user.name : null;
+        var reply = new builder.Message()
+                .address(message.address)
+                .text("Hello %s... Thanks for adding me. How can I help you? ", name || 'there');
+        bot.send(reply);
+    } else {
+        // delete their data
+    }
+});
+
+
+bot.endConversationAction('goodbye', 'Goodbye:)', { matches: /^.*bye/i });
+
+//=========================================================
+// Bots Dialogs
+//=========================================================
+var style = builder.ListStyle["button"];
+
+
 // Create LUIS recognizer that points at our model and add it as the root '/' dialog for our Cortana Bot.
 var model = 'https://api.projectoxford.ai/luis/v1/application?id=27980a6e-ec18-4fa5-bc3f-8a031eb74f4c&subscription-key=a5c9c598a1864e928073f34258f04e27';
 // Main dialog with LUIS
-var recognizer = new builder.LuisRecognizer(LuisModelUrl);
+var recognizer = new builder.LuisRecognizer(model);
 var intents = new builder.IntentDialog({ recognizers: [recognizer] })
+
+intents.matches(/^hello|hi/i, [
+    function (session) {
+        session.send("Hello, how can I help you?");
+        session.endDialog("");
+    }
+]);
+
+intents.matches(/^thank |thanks/i, [
+    function (session) {
+        session.send("You are welcome.");
+        session.endDialog("");
+    }
+]);
 
 
 intents.onBegin(function (session, args, next) {
@@ -63,7 +98,10 @@ intents.matches('FindActivity', [
 
 
   
-intents.onDefault(builder.DialogAction.send("I'm sorry. I didn't understand."));
+intents.onDefault(function (session) {
+        session.send("Sorry, I'm not sure what you mean. Could you rephrase your question or provide more details?");
+		
+    })	
 
 bot.dialog('/', intents);
 
