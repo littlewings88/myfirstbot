@@ -42,7 +42,7 @@ intents.matches('FindActivity', [
         var match;
         session.send("in FindActivity");
 
-        session.send("arg is" +args);
+      
 
         var entity = builder.EntityRecognizer.findEntity(args.entities, 'carpark');
         session.send("entity is " +entity);
@@ -50,10 +50,12 @@ intents.matches('FindActivity', [
         if (!entity) {
             builder.Prompts.text(session, "Cannot intepret");
         }else {
-            next({ response: match });
+            next({ response: entity });
         }
     },
     function (session, results) {
+
+
         if (results.response) {
            
             session.send("The nearest car park is TP21.");
