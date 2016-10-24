@@ -60,9 +60,17 @@ intents.matches('FindActivity', [
            
             session.send("The nearest car park is TP21.");
 
-            var message = new builder.Message()
-                        .attachmentLayout(builder.AttachmentLayout.carousel)
-                        .attachments(cpAsAttachment);
+            var message = new builder.HeroCard()
+										.title('TP21')
+										.buttons([
+											new builder.CardAction()
+												.title('More details')
+												.type('openUrl')
+												.value('https://maps.google.com/q=HDB+HUB')]);
+        
+
+                         
+            
 
                     session.send(message);
 
@@ -81,14 +89,3 @@ intents.onDefault(function (session) {
 
 bot.dialog('/', intents);
 
-// Helpers
-function cpAsAttachment(hotel) {
-    return new builder.HeroCard()
-        .title('TP12')
-        .buttons([
-            new builder.CardAction()
-                .title('See Location')
-                .type('openUrl')
-                .value('http://maps.google.com/?q=HDB+Hub')
-        ]);
-}
