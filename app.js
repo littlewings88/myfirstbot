@@ -42,18 +42,12 @@ intents.matches('FindActivity', [
         var match;
         session.send("in FindActivity");
 
-        var entity = builder.EntityRecognizer.findEntity(args.entities, 'car park');
+        var entity = builder.EntityRecognizer.findEntity(args.entities, 'carpark');
         session.send("entity is " +entity);
 
-        if (entity) {
-            match = builder.EntityRecognizer.findBestMatch(tasks, entity.entity);
-	    session.send("match is " +match);	
-        }
-        
-        // Prompt for task name
-        if (!match) {
-            builder.Prompts.choice(session, "Cannot intepret", tasks);
-        } else {
+        if (!entity) {
+            builder.Prompts.text(session, "Cannot intepret");
+        }else {
             next({ response: match });
         }
     },
