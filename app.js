@@ -42,7 +42,7 @@ intents.matches('FindActivity', [
         var match;
         session.send("in FindActivity");
 
-        session.send("arg is" +arg);
+        session.send("arg is" +args);
 
         var entity = builder.EntityRecognizer.findEntity(args.entities, 'carpark');
         session.send("entity is " +entity);
