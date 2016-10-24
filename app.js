@@ -20,6 +20,30 @@ var bot = new builder.UniversalBot(connector);
 server.post('/api/messages', connector.listen());
 
 
+// Send welcome when conversation with bot is started, by initiating the root dialog
+bot.on('conversationUpdate', (message) => {
+    if (message.membersAdded) {
+        message.membersAdded.forEach((identity) => {
+            if (identity.id === message.address.bot.id) {
+                bot.beginDialog(message.address, '/');
+            }
+        });
+    }
+});
+
+
+bot.dialog('/', (session) => {
+	
+	session.send("Welcome!");
+});
+
+// Other wrapper functions
+function beginDialog(address, dialogId, dialogArgs) {
+    bot.beginDialog(address, dialogId, dialogArgs)
+}
+
+
+
 bot.endConversationAction('goodbye', 'Goodbye:)', { matches: /^.*bye/i });
 
 // Create LUIS recognizer that points at our model and add it as the root '/' dialog for our Cortana Bot.
