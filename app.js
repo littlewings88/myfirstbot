@@ -48,7 +48,7 @@ intents.matches('FindActivity', [
         session.send("entity is " +entity);
 
         if (!entity) {
-            builder.Prompts.text(session, "Cannot intepret");
+            builder.Prompts.text(session, "Please try again later.");
         }else {
             next({ response: entity });
         }
@@ -59,14 +59,19 @@ intents.matches('FindActivity', [
         if (results.response) {
            
             session.send("The nearest car park is TP21.");
+
+            var message = new builder.Message()
+                        .attachmentLayout(builder.AttachmentLayout.carousel)
+                        .attachments(cpAsAttachment);
+
+                    session.send(message);
+
+
         } else {
             session.send('Could not find any car park near you');
         }
     }
 ]);
-
-
-
 
   
 intents.onDefault(function (session) {
@@ -76,3 +81,14 @@ intents.onDefault(function (session) {
 
 bot.dialog('/', intents);
 
+// Helpers
+function cpAsAttachment(hotel) {
+    return new builder.HeroCard()
+        .title('TP12')
+        .buttons([
+            new builder.CardAction()
+                .title('See Location')
+                .type('openUrl')
+                .value('http://maps.google.com/?q=HDB+Hub')
+        ]);
+}
