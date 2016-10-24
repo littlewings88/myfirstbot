@@ -60,9 +60,10 @@ intents.matches('FindActivity', [
            
             session.send("The nearest car park is TP21.");
 
-            var message = createHeroCard(session);
+            var card = createHeroCard(session);
         
-            session.send(message);
+			var msg = new builder.Message(session).addAttachment(card);
+            session.send(msg);
 
 
         } else {
