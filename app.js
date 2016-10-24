@@ -20,35 +20,6 @@ var bot = new builder.UniversalBot(connector);
 server.post('/api/messages', connector.listen());
 
 
-// Send welcome when conversation with bot is started, by initiating the root dialog
-bot.on('conversationUpdate', (message) => {
-	session.send("inside message");
-	
-    if (message.membersAdded) {
-		session.send("inside member added");
-        message.membersAdded.forEach((identity) => {
-			session.send("inside identity");
-            if (identity.id === message.address.bot.id) {
-				session.send("inside / message");
-                bot.beginDialog(message.address, '/');
-            }
-        });
-    }
-});
-
-
-bot.dialog('/', (session) => {
-	
-	session.send("Welcome!");
-});
-
-// Other wrapper functions
-function beginDialog(address, dialogId, dialogArgs) {
-	session.send("inside begin dialog");
-    bot.beginDialog(address, dialogId, dialogArgs)
-}
-
-
 
 bot.endConversationAction('goodbye', 'Goodbye:)', { matches: /^.*bye/i });
 
@@ -121,7 +92,7 @@ function createHeroCard(session) {
 
 function getSampleCardImages(session) {
     return [
-        builder.CardImage.create(session, 'https://sec.ch9.ms/ch9/7ff5/e07cfef0-aa3b-40bb-9baa-7c9ef8ff7ff5/buildreactionbotframework_960.jpg')
+        builder.CardImage.create(session, 'https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318&markers=color:red%7Clabel:C%7C40.718217,-73.998284&key=AIzaSyDdB2NNyssfWkHWhJkqRKfHAuYKQdQA7LI')
     ];
 }
 function getSampleCardActions(session) {
