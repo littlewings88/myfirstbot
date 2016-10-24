@@ -40,9 +40,14 @@ intents.matches('FindActivity', [
     function (session, args, next) {
         // Process optional entities received from LUIS
         var match;
+        session.send("in FindActivity");
+
         var entity = builder.EntityRecognizer.findEntity(args.entities, 'car park');
+        session.send("entity is " +entity);
+
         if (entity) {
             match = builder.EntityRecognizer.findBestMatch(tasks, entity.entity);
+	    session.send("match is " +match);	
         }
         
         // Prompt for task name
