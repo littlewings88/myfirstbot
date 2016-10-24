@@ -22,9 +22,14 @@ server.post('/api/messages', connector.listen());
 
 // Send welcome when conversation with bot is started, by initiating the root dialog
 bot.on('conversationUpdate', (message) => {
+	session.send("inside message");
+	
     if (message.membersAdded) {
+		session.send("inside member added");
         message.membersAdded.forEach((identity) => {
+			session.send("inside identity");
             if (identity.id === message.address.bot.id) {
+				session.send("inside / message");
                 bot.beginDialog(message.address, '/');
             }
         });
@@ -39,6 +44,7 @@ bot.dialog('/', (session) => {
 
 // Other wrapper functions
 function beginDialog(address, dialogId, dialogArgs) {
+	session.send("inside begin dialog");
     bot.beginDialog(address, dialogId, dialogArgs)
 }
 
