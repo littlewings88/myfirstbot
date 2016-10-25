@@ -80,35 +80,29 @@ intents.matches('FindActivity', [
             session.send(msg);
 			*/
 
-		client.face.detect({
-                path: 'image/myface.jpg',
-                analyzesGender: true,
-				returnFaceId: true
-            }).then(function (response) {
-                //assert.ok(response[0].faceId);
-                //session.send(response[0].faceAttributes.gender);
-				billFaces.push(response[0].faceId);
-				session.send('1.'+response[0].faceId);
-                
-            }).catch(function (error) {
-                // Check if subscription is valid
-                if (error.message.indexOf('invalid subscription key')) {
-                    session.send('Subscription key is not valid, all tests will fail!');
-                    session.send(error);
-                
-                }else if (error.statusCode === 403 || error.message === 'Subscription Expired!')
-				{
-					session.send('Other errors');
-				}
+			
+			detects.push(client.face.detect({
+                    path: 'images/myface.jpg',
+                    returnFaceId: true
+                }).then(function(response) {
+                    session.send("1."+response[0].faceId);
+                    billFaces.push(response[0].faceId);
+                })
+            );
 
-                // throw error;
-            });
+            detects.push(client.face.detect({
+                    path: 'images/yourface.jpg',
+                    returnFaceId: true
+                }).then(function("2"+response) {
+                    session.send(response[0].faceId);
+                    billFaces.push(response[0].faceId);
+                })
+            );
 			
 			
 			
 			
-			
-		/*
+		
 		client.face.verify(billFaces).then(function (response) {
                 session.send("hi");
 				session.send(response);
@@ -116,7 +110,7 @@ intents.matches('FindActivity', [
                 session.send(response.confidence);
                
             });
-        }); */
+        }); 
 
         } else {
             session.send('Could not find any car park near you');
