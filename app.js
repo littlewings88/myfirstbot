@@ -80,7 +80,7 @@ intents.matches('FindActivity', [
             session.send(msg);
 			*/
 			client.emotion.analyzeEmotion({
-			path: 'image/myface.jpg'
+			path: 'image/myface.jpg';
 			}).then(function (response) {
 				session.send("hi");
 				session.send(response);
