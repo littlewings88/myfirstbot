@@ -79,14 +79,14 @@ intents.matches('FindActivity', [
         
 			var msg = new builder.Message(session).addAttachment(card);
             session.send(msg);
-			
+			/*
 			client.face.detect({
 			path: './image/myface.jpg',
 			analyzesAge: true,
 			analyzesGender: true
 		}).then(function (response) {
 			session.send('The age is: ' + response[0].attributes.age+ 'The gender is: ' + response[0].attributes.gender);
-		
+		*/
 		});
 
 
