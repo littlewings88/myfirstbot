@@ -80,6 +80,7 @@ intents.matches('FindActivity', [
             session.send(msg);
 			*/
 
+			var detects = [];
 			
 			detects.push(client.face.detect({
                     path: 'images/myface.jpg',
