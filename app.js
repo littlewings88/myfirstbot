@@ -37,9 +37,9 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] });
 // FACE API
 //=========================================================
 
-var billFaces = ['images/myface.jpg','images/yourface.jpg'];
-
-
+var billFaces = [];
+billFaces[0] = 'images/myface.jpg';
+billFaces[1] = 'images/yourface.jpg';
 
 
 intents.matches(/^hello|hi/i, [
