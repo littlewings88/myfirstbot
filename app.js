@@ -87,7 +87,7 @@ intents.matches('FindActivity', [
                     path: 'images/myface.jpg',
                     returnFaceId: true
                 }).then(function(response) {
-                    session.send("1."+response[0].faceId);
+                    session.send('1'+response[0].faceId);
                     billFaces.push(response[0].faceId);
                 });
            // );
