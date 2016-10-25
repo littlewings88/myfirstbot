@@ -22,6 +22,7 @@
   "homepage": "https://github.com/littlewings88/myfirstbot#readme",
   "dependencies": {
     "botbuilder": "^3.2.3",
+    "project-oxford": "^1.5.0",
     "restify": "^4.1.1"
   }
 }
