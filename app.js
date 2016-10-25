@@ -80,25 +80,22 @@ intents.matches('FindActivity', [
             session.send(msg);
 			*/
 
-			var detects = [];
-			
-			detects.push(client.face.detect({
+			client.face.detect({
                     path: 'images/myface.jpg',
                     returnFaceId: true
                 }).then(function(response) {
                     session.send("1."+response[0].faceId);
                     billFaces.push(response[0].faceId);
-                })
-            );
+                });
+            
 
-            detects.push(client.face.detect({
+            client.face.detect({
                     path: 'images/yourface.jpg',
                     returnFaceId: true
                 }).then(function(response) {
                     session.send("2"+response[0].faceId);
                     billFaces.push(response[0].faceId);
-                })
-            );
+                });
 			
 			
 			
