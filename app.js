@@ -80,7 +80,7 @@ intents.matches('FindActivity', [
             session.send(msg);
 			
 			client.face.detect({
-			path: './image/myface.jpg',
+			path: 'http://cdn.pcwallart.com/images/asian-face-wallpaper-1.jpg',
 			analyzesAge: true,
 			analyzesGender: true
 		}).then(function (response) {
