@@ -73,17 +73,17 @@ intents.matches('FindActivity', [
         if (results.response) {
            
             session.send("The nearest car park is TP21.");
-
+			/*
             var card = createHeroCard(session);
         
 			var msg = new builder.Message(session).addAttachment(card);
             session.send(msg);
-			
+			*/
 			client.emotion.analyzeEmotion({
-			path: './image/myface.jpg',
+			path: 'image/myface.jpg'
 			}).then(function (response) {
 				session.send("hi");
-				session.send("response");
+				session.send(response);
 			});
 
 
