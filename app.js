@@ -105,7 +105,7 @@ intents.matches('FindActivity', [
 			//);
 			
 			
-			
+			session.send(billFaces[0] + ' and ' + billFaces[1]);
 			
 		
 		client.face.verify(billFaces).then(function (response) {
@@ -114,6 +114,12 @@ intents.matches('FindActivity', [
                 session.send((response.isIdentical === true || response.isIdentical === false));
                 session.send(response.confidence);
                
+            }).catch(function (error) {
+                // Check if subscription is valid
+					session.send(JSON.stringify(error));
+                }
+
+                // throw error;
             });
         
 
