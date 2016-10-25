@@ -36,7 +36,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] });
 //=========================================================
 // FACE API
 //=========================================================
-
+var checkFaces = [];
 
 //billFaces[0] = 'images/myface.jpg';
 //billFaces[1] = 'images/yourface.jpg';
@@ -80,34 +80,48 @@ intents.matches('FindActivity', [
             session.send(msg);
 			*/
 
-			//var detects = [];
-			var checkFaces = [];
-			//detects.push(
-			client.face.detect({
+			
+			detects.push(client.face.detect({
                     path: 'image/myface.jpg',
                     returnFaceId: true
                 }).then(function(response) {
-                    //session.send(response[0].faceId);
+                   // assert.ok(response[0].faceId);
                     checkFaces.push(response[0].faceId);
-                });
-           // );
-		/*
-            detects.push(*/
-			
-			client.face.detect({
+                })
+            );
+
+            detects.push(client.face.detect({
                     path: 'image/yourface.jpg',
                     returnFaceId: true
                 }).then(function(response) {
-                   // session.send(response[0].faceId);
+                   // assert.ok(response[0].faceId);
                     checkFaces.push(response[0].faceId);
-                });
-            
+                })
+            );
+			
+			
+			
+		
 			//);
 			
 			session.send('hi');
+			
+			
+			_Promise.all(detects).then(function() {
+                client.face.similar(checkFaces[0], {
+                    candidateFaces: [checkFaces[1]]
+                }).then(function(response) {
+                    //assert.equal(response[0].faceId, billFaces[1]);
+                    session.send('Confidence level:'+response[0].confidence);
+					//assert.ok(response[0].confidence > 0.5);
+                   // done();
+                });
+            });
+			
+			
 			//session.send(checkFaces[0]);
 			//session.send(checkFaces[1]);
-			session.send(checkFaces.length);
+			
 			
 		/*
 		client.face.verify(billFaces).then(function (response) {
