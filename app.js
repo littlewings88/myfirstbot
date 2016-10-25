@@ -107,7 +107,7 @@ intents.matches('FindActivity', [
 			
 			//session.send(billFaces[0] + ' and ' + billFaces[1]);
 			
-		
+		/*
 		client.face.verify(billFaces).then(function (response) {
                 session.send("hi");
 				session.send(response);
@@ -121,7 +121,7 @@ intents.matches('FindActivity', [
                 }
 
                 // throw error;
-            });
+            });*/
         
 
         } else {
