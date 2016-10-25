@@ -37,7 +37,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] });
 // FACE API
 //=========================================================
 
-
+var billFaces = ['images/myface.jpg','images/yourface.jpg'];
 
 
 
@@ -86,7 +86,7 @@ intents.matches('FindActivity', [
             }).then(function (response) {
                 //assert.ok(response[0].faceId);
                 session.send(response[0].faceAttributes.gender);
-                done();
+                
             }).catch(function (error) {
                 // Check if subscription is valid
                 if (error.message.indexOf('invalid subscription key')) {
@@ -101,7 +101,13 @@ intents.matches('FindActivity', [
                 // throw error;
             });
 			
-
+		client.face.verify(billFaces).then(function (response) {
+                session.send(response);
+                session.send((response.isIdentical === true || response.isIdentical === false));
+                session.send(response.confidence);
+               
+            });
+        });
 
         } else {
             session.send('Could not find any car park near you');
