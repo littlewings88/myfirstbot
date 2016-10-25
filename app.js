@@ -79,7 +79,7 @@ intents.matches('FindActivity', [
 			var msg = new builder.Message(session).addAttachment(card);
             session.send(msg);
 			*/
-
+			var detects = [];
 			
 			detects.push(client.face.detect({
                     path: 'image/myface.jpg',
