@@ -37,7 +37,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] });
 // FACE API
 //=========================================================
 
-var billFaces = [];
+
 //billFaces[0] = 'images/myface.jpg';
 //billFaces[1] = 'images/yourface.jpg';
 
@@ -81,7 +81,7 @@ intents.matches('FindActivity', [
 			*/
 
 			//var detects = [];
-			
+			var billFaces = [];
 			//detects.push(
 			client.face.detect({
                     path: 'image/myface.jpg',
@@ -105,7 +105,9 @@ intents.matches('FindActivity', [
 			//);
 			
 			
-			session.send(billFaces[0] + ' and ' + billFaces[1]);
+			session.send(billFaces[0]);
+			session.send(billFaces[1]);
+			session.send(billFaces.length);
 			
 		/*
 		client.face.verify(billFaces).then(function (response) {
