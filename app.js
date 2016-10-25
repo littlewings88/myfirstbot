@@ -88,7 +88,7 @@ intents.matches('FindActivity', [
                 //assert.ok(response[0].faceId);
                 //session.send(response[0].faceAttributes.gender);
 				billFaces.push(response[0].faceId);
-				session.send(response[0].faceId);
+				session.send("1."+response[0].faceId);
                 
             }).catch(function (error) {
                 // Check if subscription is valid
@@ -112,7 +112,7 @@ intents.matches('FindActivity', [
                 //assert.ok(response[0].faceId);
                 //session.send(response[0].faceAttributes.gender);
 				billFaces.push(response[0].faceId);
-				session.send(response[0].faceId);
+				session.send("2"+response[0].faceId);
                 
             }).catch(function (error) {
                 // Check if subscription is valid
