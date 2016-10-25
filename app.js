@@ -38,8 +38,8 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] });
 //=========================================================
 
 var billFaces = [];
-billFaces[0] = 'images/myface.jpg';
-billFaces[1] = 'images/yourface.jpg';
+//billFaces[0] = 'images/myface.jpg';
+//billFaces[1] = 'images/yourface.jpg';
 
 
 intents.matches(/^hello|hi/i, [
@@ -82,10 +82,12 @@ intents.matches('FindActivity', [
 
 		client.face.detect({
                 path: 'image/myface.jpg',
-                analyzesGender: true
+                analyzesGender: true,
+				returnFaceId: true
             }).then(function (response) {
                 //assert.ok(response[0].faceId);
-                session.send(response[0].faceAttributes.gender);
+                //session.send(response[0].faceAttributes.gender);
+				billFaces.push(response[0].faceId);
                 
             }).catch(function (error) {
                 // Check if subscription is valid
@@ -101,6 +103,10 @@ intents.matches('FindActivity', [
                 // throw error;
             });
 			
+			
+			
+			
+		/*	
 		client.face.verify(billFaces).then(function (response) {
                 session.send("hi");
 				//session.send(response);
@@ -108,7 +114,7 @@ intents.matches('FindActivity', [
                 //session.send(response.confidence);
                
             });
-        }); 
+        }); */
 
         } else {
             session.send('Could not find any car park near you');
