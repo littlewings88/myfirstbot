@@ -79,7 +79,7 @@ intents.matches('FindActivity', [
 			var msg = new builder.Message(session).addAttachment(card);
             session.send(msg);
 			*/
-/*
+
 		client.face.detect({
                 path: 'image/myface.jpg',
                 analyzesGender: true
@@ -100,7 +100,7 @@ intents.matches('FindActivity', [
 
                 // throw error;
             });
-			
+			/*
 		client.face.verify(billFaces).then(function (response) {
                 session.send(response);
                 session.send((response.isIdentical === true || response.isIdentical === false));
