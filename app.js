@@ -1,6 +1,6 @@
 var builder = require('botbuilder');
 var restify = require('restify');
-var oxford = require('project-oxford'),client = new oxford.Client('cbff8a55e6c4468b875f4042e4b087c2');
+var oxford = require('project-oxford'),client = new oxford.Client('1d57abfdd3ae474d883d28f7e5fea645');
 //=========================================================
 // Bot Setup
 //=========================================================
