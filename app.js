@@ -92,17 +92,20 @@ intents.matches('FindActivity', [
                 });
            // );
 		/*
-            detects.push(client.face.detect({
+            detects.push(*/
+			
+			client.face.detect({
                     path: 'images/yourface.jpg',
                     returnFaceId: true
                 }).then(function(response) {
-                    session.send("2"+response[0].faceId);
+                    session.send(response[0].faceId);
                     billFaces.push(response[0].faceId);
-                })
-            );
+                });
+            
+			//);
 			
 			
-			*/
+			
 			
 		/*
 		client.face.verify(billFaces).then(function (response) {
