@@ -105,8 +105,8 @@ intents.matches('FindActivity', [
 			//);
 			
 			
-			session.send(checkFaces[0]);
-			session.send(checkFaces[1]);
+			//session.send(checkFaces[0]);
+			//session.send(checkFaces[1]);
 			session.send(checkFaces.length);
 			
 		/*
