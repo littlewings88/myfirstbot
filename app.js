@@ -116,7 +116,8 @@ intents.matches('FindActivity', [
                
             }).catch(function (error) {
                 // Check if subscription is valid
-					session.send(JSON.stringify(error));
+					//session.send(JSON.stringify(error));
+					session.send('error');
                 }
 
                 // throw error;
