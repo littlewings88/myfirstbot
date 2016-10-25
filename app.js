@@ -79,7 +79,7 @@ intents.matches('FindActivity', [
 			var msg = new builder.Message(session).addAttachment(card);
             session.send(msg);
 			*/
-
+/*
 		client.face.detect({
                 path: 'image/myface.jpg',
                 analyzesGender: true
@@ -107,7 +107,7 @@ intents.matches('FindActivity', [
                 session.send(response.confidence);
                
             });
-        });
+        }); */
 
         } else {
             session.send('Could not find any car park near you');
