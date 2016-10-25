@@ -85,9 +85,9 @@ intents.matches('FindActivity', [
 			analyzesGender: true
 		}).then(function (response) {
 			session.send('The age is: ' + response[0].attributes.age+ 'The gender is: ' + response[0].attributes.gender);
-		*/
+		
 		});
-
+*/
 
         } else {
             session.send('Could not find any car park near you');
