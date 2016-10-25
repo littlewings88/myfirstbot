@@ -79,12 +79,25 @@ intents.matches('FindActivity', [
 			var msg = new builder.Message(session).addAttachment(card);
             session.send(msg);
 			*/
-			client.emotion.analyzeEmotion({
-			path: 'image/myface.jpg';
-			}).then(function (response) {
-				session.send("hi");
-				session.send(response);
-			});
+
+		client.face.detect({
+                path: 'image/myface.jpg',
+                analyzesGender: true
+            }).then(function (response) {
+                //assert.ok(response[0].faceId);
+                assert.ok(response[0].faceAttributes.gender);
+                done();
+            }).catch(function (error) {
+                // Check if subscription is valid
+                if (error.statusCode === 403 || error.message === 'Subscription Expired!' || error.message.indexOf('invalid subscription key')) {
+                    session.send('Subscription key is not valid, all tests will fail!');
+                    session.send(error);
+                
+                }
+
+                // throw error;
+            });
+			
 
 
         } else {
@@ -92,6 +105,8 @@ intents.matches('FindActivity', [
         }
     }
 ]);
+
+
 
   
 intents.onDefault(function (session) {
