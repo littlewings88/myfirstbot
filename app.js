@@ -1,6 +1,7 @@
 var builder = require('botbuilder');
 var restify = require('restify');
-
+var oxford = require('project-oxford'),
+    client = new oxford.Client('cbff8a55e6c4468b875f4042e4b087c2');
 //=========================================================
 // Bot Setup
 //=========================================================
@@ -20,14 +21,27 @@ var bot = new builder.UniversalBot(connector);
 server.post('/api/messages', connector.listen());
 
 
-
 bot.endConversationAction('goodbye', 'Goodbye:)', { matches: /^.*bye/i });
+
+//=========================================================
+// LUIS Setup
+//=========================================================
+
 
 // Create LUIS recognizer that points at our model and add it as the root '/' dialog for our Cortana Bot.
 var model = 'https://api.projectoxford.ai/luis/v1/application?id=27980a6e-ec18-4fa5-bc3f-8a031eb74f4c&subscription-key=a5c9c598a1864e928073f34258f04e27';
 // Main dialog with LUIS
 var recognizer = new builder.LuisRecognizer(model);
 var intents = new builder.IntentDialog({ recognizers: [recognizer] });
+
+//=========================================================
+// FACE API
+//=========================================================
+
+
+
+
+
 
 intents.matches(/^hello|hi/i, [
     function (session) {
@@ -46,7 +60,7 @@ intents.matches('FindActivity', [
       
 
         var entity = builder.EntityRecognizer.findEntity(args.entities, 'carpark');
-        session.send("entity is " +entity);
+        //session.send("entity is " +entity);
 
         if (!entity) {
             builder.Prompts.text(session, "Please try again later.");
@@ -65,6 +79,15 @@ intents.matches('FindActivity', [
         
 			var msg = new builder.Message(session).addAttachment(card);
             session.send(msg);
+			
+			client.face.detect({
+			path: './image/myface.jpg',
+			analyzesAge: true,
+			analyzesGender: true
+		}).then(function (response) {
+			session.send('The age is: ' + response[0].attributes.age+ 'The gender is: ' + response[0].attributes.gender);
+		
+		});
 
 
         } else {
