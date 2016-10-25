@@ -85,15 +85,18 @@ intents.matches('FindActivity', [
                 analyzesGender: true
             }).then(function (response) {
                 //assert.ok(response[0].faceId);
-                assert.ok(response[0].faceAttributes.gender);
+                session.send(response[0].faceAttributes.gender);
                 done();
             }).catch(function (error) {
                 // Check if subscription is valid
-                if (error.statusCode === 403 || error.message === 'Subscription Expired!' || error.message.indexOf('invalid subscription key')) {
+                if (error.message.indexOf('invalid subscription key')) {
                     session.send('Subscription key is not valid, all tests will fail!');
                     session.send(error);
                 
-                }
+                }else if (error.statusCode === 403 || error.message === 'Subscription Expired!')
+				{
+					session.send('Other errors');
+				}
 
                 // throw error;
             });
