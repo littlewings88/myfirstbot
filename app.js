@@ -100,14 +100,15 @@ intents.matches('FindActivity', [
 
                 // throw error;
             });
-			/*
+			
 		client.face.verify(billFaces).then(function (response) {
-                session.send(response);
-                session.send((response.isIdentical === true || response.isIdentical === false));
-                session.send(response.confidence);
+                session.send("hi");
+				//session.send(response);
+                //session.send((response.isIdentical === true || response.isIdentical === false));
+                //session.send(response.confidence);
                
             });
-        }); */
+        }); 
 
         } else {
             session.send('Could not find any car park near you');
