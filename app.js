@@ -81,14 +81,14 @@ intents.matches('FindActivity', [
 			*/
 
 			//var detects = [];
-			var billFaces = [];
+			var checkFaces = [];
 			//detects.push(
 			client.face.detect({
                     path: 'image/myface.jpg',
                     returnFaceId: true
                 }).then(function(response) {
-                    session.send(response[0].faceId);
-                    billFaces.push(response[0].faceId);
+                    //session.send(response[0].faceId);
+                    checkFaces.push(response[0].faceId);
                 });
            // );
 		/*
@@ -98,16 +98,16 @@ intents.matches('FindActivity', [
                     path: 'image/yourface.jpg',
                     returnFaceId: true
                 }).then(function(response) {
-                    session.send(response[0].faceId);
-                    billFaces.push(response[0].faceId);
+                   // session.send(response[0].faceId);
+                    checkFaces.push(response[0].faceId);
                 });
             
 			//);
 			
 			
-			session.send(billFaces[0]);
-			session.send(billFaces[1]);
-			session.send(billFaces.length);
+			session.send(checkFaces[0]);
+			session.send(checkFaces[1]);
+			session.send(checkFaces.length);
 			
 		/*
 		client.face.verify(billFaces).then(function (response) {
