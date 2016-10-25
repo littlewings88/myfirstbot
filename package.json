@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/littlewings88/myfirstbot#readme",
   "dependencies": {
+    "bluebird": "^3.4.6",
     "botbuilder": "^3.2.3",
     "project-oxford": "^1.5.0",
     "restify": "^4.1.1"
