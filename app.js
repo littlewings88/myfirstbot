@@ -107,7 +107,7 @@ intents.matches('FindActivity', [
 			
 			
 			
-		/*
+		
 		client.face.verify(billFaces).then(function (response) {
                 session.send("hi");
 				session.send(response);
@@ -115,7 +115,7 @@ intents.matches('FindActivity', [
                 session.send(response.confidence);
                
             });
-        }); */
+        
 
         } else {
             session.send('Could not find any car park near you');
