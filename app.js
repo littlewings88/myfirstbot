@@ -105,7 +105,7 @@ intents.matches('FindActivity', [
 			//);
 			
 			
-			session.send(billFaces[0] + ' and ' + billFaces[1]);
+			//session.send(billFaces[0] + ' and ' + billFaces[1]);
 			
 		
 		client.face.verify(billFaces).then(function (response) {
