@@ -1,6 +1,7 @@
 var builder = require('botbuilder');
 var restify = require('restify');
 var oxford = require('project-oxford'),client = new oxford.Client('1d57abfdd3ae474d883d28f7e5fea645');
+var _Promise = require('bluebird'),
 //=========================================================
 // Bot Setup
 //=========================================================
