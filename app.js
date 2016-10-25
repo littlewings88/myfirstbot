@@ -80,14 +80,14 @@ intents.matches('FindActivity', [
             session.send(msg);
 			*/
 
-			var detects = [];
+			//var detects = [];
 			
 			//detects.push(
 			client.face.detect({
-                    path: 'images/myface.jpg',
+                    path: 'image/myface.jpg',
                     returnFaceId: true
                 }).then(function(response) {
-                    session.send('1'+response[0].faceId);
+                    session.send(response[0].faceId);
                     billFaces.push(response[0].faceId);
                 });
            // );
