@@ -104,29 +104,7 @@ intents.matches('FindActivity', [
                 // throw error;
             });
 			
-			client.face.detect({
-                path: 'image/yourface.jpg',
-                analyzesGender: true,
-				returnFaceId: true
-            }).then(function (response) {
-                //assert.ok(response[0].faceId);
-                //session.send(response[0].faceAttributes.gender);
-				billFaces.push(response[0].faceId);
-				session.send('2'+response[0].faceId);
-                
-            }).catch(function (error) {
-                // Check if subscription is valid
-                if (error.message.indexOf('invalid subscription key')) {
-                    session.send('Subscription key is not valid, all tests will fail!');
-                    session.send(error);
-                
-                }else if (error.statusCode === 403 || error.message === 'Subscription Expired!')
-				{
-					session.send('Other errors');
-				}
-
-                // throw error;
-            });
+			
 			
 			
 			
