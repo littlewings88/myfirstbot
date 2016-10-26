@@ -83,7 +83,7 @@ intents.matches('FindActivity', [
 			var detects = [];
 			
 			detects.push(client.face.detect({
-                    path: 'image/myface.jpg',
+                    path: 'image/suzy1.jpg',
                     returnFaceId: true
                 }).then(function(response) {
                    // assert.ok(response[0].faceId);
@@ -93,7 +93,7 @@ intents.matches('FindActivity', [
             );
 
             detects.push(client.face.detect({
-                    path: 'image/myface.jpg',
+                    path: 'image/suzy2.jpg',
                     returnFaceId: true
                 }).then(function(response) {
                    // assert.ok(response[0].faceId);
