@@ -114,7 +114,18 @@ intents.matches('FindActivity', [
 				
 				session.send('3'+JSON.stringify(checkFaces));
 					
-				
+					
+					
+				client.face.verify(checkFaces).then(function (response) {
+					session.send('4'+JSON.stringify(arguments));
+                session.send(JSON.stringify(response));
+				/*assert.ok(response);
+                assert.ok((response.isIdentical === true || response.isIdentical === false));
+                assert.ok(response.confidence);
+                done();*/
+				});	
+					
+				/*
                 client.face.similar(checkFaces[0], {
                     candidateFaces: [checkFaces[1]]
                 }).then(function(response) {
@@ -136,12 +147,10 @@ intents.matches('FindActivity', [
 
                 // throw error;
             });
-			
+			*/
             });
 			
-			
-			//session.send(checkFaces[0]);
-			//session.send(checkFaces[1]);
+		
 			
 			
 		/*
