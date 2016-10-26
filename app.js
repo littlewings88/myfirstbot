@@ -87,6 +87,7 @@ intents.matches('FindActivity', [
                     returnFaceId: true
                 }).then(function(response) {
                    // assert.ok(response[0].faceId);
+				   session.send('1'+response[0].faceId);
                     checkFaces.push(response[0].faceId);
                 })
             );
@@ -96,6 +97,7 @@ intents.matches('FindActivity', [
                     returnFaceId: true
                 }).then(function(response) {
                    // assert.ok(response[0].faceId);
+				   session.send('2'+response[0].faceId);
                     checkFaces.push(response[0].faceId);
                 })
             );
@@ -113,6 +115,7 @@ intents.matches('FindActivity', [
                     candidateFaces: [checkFaces[1]]
                 }).then(function(response) {
                     //assert.equal(response[0].faceId, billFaces[1]);
+					session.send('3'+JSON.stringify(checkFaces));
                     session.send('Confidence level:'+response[0].confidence);
 					//assert.ok(response[0].confidence > 0.5);
                    // done();
