@@ -130,12 +130,13 @@ intents.matches('FindActivity', [
                 // Check if subscription is valid
                 if (error.statusCode === 403 || error.message === 'Subscription Expired!' || error.message.indexOf('invalid subscription key')) {
                     console.error('Subscription key is not valid, all tests will fail!');
-                    console.log(error);
-                    return process.exit(1);
+                    console.log(JSON.stringify(error)));
+                  
                 }
 
                 // throw error;
             });
+			
             });
 			
 			
