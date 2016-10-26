@@ -111,12 +111,18 @@ intents.matches('FindActivity', [
 			
 			
 			_Promise.all(detects).then(function() {
+				
+				session.send('3'+JSON.stringify(checkFaces));
+					
+				
                 client.face.similar(checkFaces[0], {
                     candidateFaces: [checkFaces[1]]
                 }).then(function(response) {
+					
+					
+					session.send('4'+JSON.stringify(arguments));
                     //assert.equal(response[0].faceId, billFaces[1]);
-					session.send('3'+JSON.stringify(checkFaces));
-					session.send('3'+JSON.stringify(response));
+					
                     session.send('Confidence level:'+response[0].confidence);
 					//assert.ok(response[0].confidence > 0.5);
                    // done();
