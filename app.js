@@ -116,6 +116,7 @@ intents.matches('FindActivity', [
                 }).then(function(response) {
                     //assert.equal(response[0].faceId, billFaces[1]);
 					session.send('3'+JSON.stringify(checkFaces));
+					session.send('3'+JSON.stringify(response));
                     session.send('Confidence level:'+response[0].confidence);
 					//assert.ok(response[0].confidence > 0.5);
                    // done();
