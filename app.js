@@ -193,8 +193,9 @@ function downloadAttachments(session,connector, message, callback) {
         ], function (err, token) {
             if (!err) {
                 var buffers = [];
-              
+					session.send('token:'+token);
                     var contentUrl = message.contentUrl;
+					session.send('content url:'+contentUrl);
                     var headers = {};
                    
                         headers['Authorization'] = 'Bearer ' + token;
@@ -206,13 +207,12 @@ function downloadAttachments(session,connector, message, callback) {
                     }, function (err, res, body) {
                         if (!err && res.statusCode == 200) {
                             buffers.push(body);
-							console.log(body);
-							session.send(body);
+							console.log(body + 'BODY');
+							//session.send(body);
                         }
                         cb(err);
-						//console.log(res);
-						session.send(res);
-						session.send(err + "body:"+body);
+						console.log(res + 'Error');
+						
                     });
                
             }
