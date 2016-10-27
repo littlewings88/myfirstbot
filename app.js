@@ -98,7 +98,7 @@ intents.matches('FindActivity', [
 	var detects = [];
 			
 			detects.push(client.face.detect({
-                    path: uploadedImage.contentUrl,
+                    url: uploadedImage.contentUrl,
                     returnFaceId: true
                 }).then(function(response) {
 				   session.send('1'+response[0].faceId);
