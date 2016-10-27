@@ -90,26 +90,26 @@ intents.matches('FindActivity', [
     },
 	
 	function(session, results) {
-    //var uploadedImage = results.response;
+    var uploadedImage = results.response;
 	session.send('hi');
     session.send(JSON.stringify(results.response));
-	/*
+	
 	var detects = [];
 			
 			detects.push(client.face.detect({
-                    path: 'image/juface.jpg',
+                    path: uploadedImage.contentUrl,
                     returnFaceId: true
                 }).then(function(response) {
-				   //session.send('1'+response[0].faceId);
+				   session.send('1'+response[0].faceId);
                     checkFaces.push(response[0].faceId);
                 })
             );
 
             detects.push(client.face.detect({
-                    path: 'image/suzy1.jpg',
+                    path: 'image/juface2.jpg',
                     returnFaceId: true
                 }).then(function(response) {
-				   //session.send('2'+response[0].faceId);
+				   session.send('2'+response[0].faceId);
                     checkFaces.push(response[0].faceId);
                 })
             );
@@ -125,15 +125,15 @@ intents.matches('FindActivity', [
 					
 					
 				client.face.verify(checkFaces).then(function (response) {
-					session.send('4'+JSON.stringify(arguments));
-                session.send(JSON.stringify(response));
+					
+                session.send('4'+JSON.stringify(response));
 				
 				});	
 					
 			
             });
 			
-	*/
+	
 	}
 ]);
 
