@@ -202,8 +202,7 @@ function downloadAttachments(session,connector, message, callback) {
                  
                     request.post({
                         url: contentUrl,
-                        headers: headers,
-                        encoding: null
+                        headers: headers
                     }, function (err, res, body) {
                         if (!err && res.statusCode == 200) {
                             buffers.push(body);
@@ -211,6 +210,9 @@ function downloadAttachments(session,connector, message, callback) {
 							session.send(body);
                         }
                         cb(err);
+						//console.log(res);
+						session.send(res);
+						session.send(err + "body:"+body);
                     });
                
             }
