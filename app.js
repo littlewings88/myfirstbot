@@ -93,7 +93,7 @@ intents.matches('FindActivity', [
     var uploadedImage = results.response[0];
 	session.send('hi');
     session.send(JSON.stringify(results.response));
-	sessoin.send(uploadedImage.contentUrl);
+	session.send(uploadedImage.contentUrl);
 	
 	var detects = [];
 			
