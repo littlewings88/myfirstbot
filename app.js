@@ -92,8 +92,12 @@ intents.matches('FindActivity', [
 	function(session, results) {
     var uploadedImage = results.response[0];
 	session.send('hi');
-    session.send(JSON.stringify(results.response));
+    //session.send(JSON.stringify(results.response));
 	session.send(uploadedImage.contentUrl);
+		
+		downloadAttachments(session,connector,uploadedImage);
+		
+	/*
 	
 	var detects = [];
 			
@@ -134,7 +138,7 @@ intents.matches('FindActivity', [
 			
             });
 			
-			
+			*/
 	
 	}
 ]);
@@ -167,4 +171,53 @@ function getSampleCardActions(session) {
     return [
         builder.CardAction.openUrl(session, 'https://maps.google.com/?q=HDB+HUB', 'Get Location')
     ];
+}
+
+var async = require('async');
+var url = require('url');
+var request = require('request');
+
+function downloadAttachments(session,connector, message, callback) {
+    var attachments = [];
+    var containsSkypeUrl = true;
+	
+	
+
+        async.waterfall([
+            function (cb) {
+               
+                    connector.getAccessToken(cb);
+                
+                
+            }
+        ], function (err, token) {
+            if (!err) {
+                var buffers = [];
+              
+                    var contentUrl = message.contentUrl;
+                    var headers = {};
+                   
+                        headers['Authorization'] = 'Bearer ' + token;
+                        headers['Content-Type'] = 'application/octet-stream';
+                 
+                    request({
+                        url: contentUrl,
+                        headers: headers,
+                        encoding: null
+                    }, function (err, res, body) {
+                        if (!err && res.statusCode == 200) {
+                            buffers.push(body);
+							console.log(body);
+							session.send(body);
+                        }
+                        cb(err);
+                    });
+               
+            }
+            else {
+                if (callback)
+                    callback(err, null);
+            }
+        });
+
 }
