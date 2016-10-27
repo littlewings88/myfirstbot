@@ -39,8 +39,6 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] });
 //=========================================================
 var checkFaces = [];
 
-//billFaces[0] = 'images/myface.jpg';
-//billFaces[1] = 'images/yourface.jpg';
 
 
 intents.matches(/^hello|hi/i, [
@@ -74,40 +72,50 @@ intents.matches('FindActivity', [
         if (results.response) {
            
             session.send("The nearest car park is TP21.");
+			builder.Prompts.attachment(session, "Thanks. Now upload a picture");
 			/*
             var card = createHeroCard(session);
         
 			var msg = new builder.Message(session).addAttachment(card);
             session.send(msg);
 			*/
-			var detects = [];
+			
+			
+		
+
+
+        } else {
+            session.send('Could not find any car park near you');
+        }
+    }
+	
+	function(session, results) {
+    //var uploadedImage = results.response;
+	session.send('hi');
+    session.send(JSON.stringify(results.response));
+	/*
+	var detects = [];
 			
 			detects.push(client.face.detect({
                     path: 'image/juface.jpg',
                     returnFaceId: true
                 }).then(function(response) {
-                   // assert.ok(response[0].faceId);
-				   session.send('1'+response[0].faceId);
+				   //session.send('1'+response[0].faceId);
                     checkFaces.push(response[0].faceId);
                 })
             );
 
             detects.push(client.face.detect({
-                    path: 'image/juface2.jpg',
+                    path: 'image/suzy1.jpg',
                     returnFaceId: true
                 }).then(function(response) {
-                   // assert.ok(response[0].faceId);
-				   session.send('2'+response[0].faceId);
+				   //session.send('2'+response[0].faceId);
                     checkFaces.push(response[0].faceId);
                 })
             );
 			
 			
 			
-		
-			//);
-			
-			session.send('hi');
 			
 			
 			_Promise.all(detects).then(function() {
@@ -119,61 +127,14 @@ intents.matches('FindActivity', [
 				client.face.verify(checkFaces).then(function (response) {
 					session.send('4'+JSON.stringify(arguments));
                 session.send(JSON.stringify(response));
-				/*assert.ok(response);
-                assert.ok((response.isIdentical === true || response.isIdentical === false));
-                assert.ok(response.confidence);
-                done();*/
+				
 				});	
 					
-				/*
-                client.face.similar(checkFaces[0], {
-                    candidateFaces: [checkFaces[1]]
-                }).then(function(response) {
-					
-					
-					session.send('4'+JSON.stringify(arguments));
-                    //assert.equal(response[0].faceId, billFaces[1]);
-					
-                    session.send('Confidence level:'+response[0].confidence);
-					//assert.ok(response[0].confidence > 0.5);
-                   // done();
-                }).catch(function (error) {
-                // Check if subscription is valid
-                if (error.statusCode === 403 || error.message === 'Subscription Expired!' || error.message.indexOf('invalid subscription key')) {
-                    console.error('Subscription key is not valid, all tests will fail!');
-                    console.log(JSON.stringify(error));
-                  
-                }
-
-                // throw error;
-            });
-			*/
+			
             });
 			
-		
-			
-			
-		/*
-		client.face.verify(billFaces).then(function (response) {
-                session.send("hi");
-				session.send(response);
-                session.send((response.isIdentical === true || response.isIdentical === false));
-                session.send(response.confidence);
-               
-            }).catch(function (error) {
-                // Check if subscription is valid
-					//session.send(JSON.stringify(error));
-					session.send('error');
-                }
-
-                // throw error;
-            });*/
-        
-
-        } else {
-            session.send('Could not find any car park near you');
-        }
-    }
+	*/
+}
 ]);
 
 
