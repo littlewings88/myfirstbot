@@ -200,7 +200,7 @@ function downloadAttachments(session,connector, message, callback) {
                         headers['Authorization'] = 'Bearer ' + token;
                         headers['Content-Type'] = 'application/octet-stream';
                  
-                    request.post({
+                    request({
                         url: contentUrl,
                         headers: headers
                     }, function (err, res, body) {
