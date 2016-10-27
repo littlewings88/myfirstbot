@@ -87,7 +87,7 @@ intents.matches('FindActivity', [
         } else {
             session.send('Could not find any car park near you');
         }
-    }
+    },
 	
 	function(session, results) {
     //var uploadedImage = results.response;
@@ -134,7 +134,7 @@ intents.matches('FindActivity', [
             });
 			
 	*/
-}
+	}
 ]);
 
 
