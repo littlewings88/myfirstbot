@@ -186,6 +186,7 @@ function downloadAttachments(session,connector, message, callback) {
 
 function compareFaces(session, faceToCompare){
 	
+	/*
 	var faceURL = 'https://api.projectoxford.ai/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=false';
 	var subscription = 'cbff8a55e6c4468b875f4042e4b087c2';
 	
@@ -212,14 +213,14 @@ function compareFaces(session, faceToCompare){
 						
                     });
 	
+	*/
 	
 	
-	/*
-	var compareFace64 = new Buffer(faceToCompare).toString('base64');
+	//var compareFace64 = new Buffer(faceToCompare).toString('base64');
 	var detects = [];
 			
 			detects.push(client.face.detect({
-                    data: oxford.makeBuffer('data:image/jpeg;base64,' + compareFace64),
+                    data: faceToCompare,
                     returnFaceId: true
                 }).then(function(response) {
 				   session.send('1'+response[0].faceId);
@@ -254,6 +255,6 @@ function compareFaces(session, faceToCompare){
 					
 			
             });
-*/	
+
 	
 }
