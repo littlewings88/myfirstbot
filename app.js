@@ -97,12 +97,12 @@ intents.matches('FindActivity', [
 		
 		downloadAttachments(session,connector,uploadedImage);
 		
-	/*
+		console.log('buffer: '+buffers[0]);
 	
 	var detects = [];
 			
 			detects.push(client.face.detect({
-                    url: uploadedImage.contentUrl,
+                    url: buffers[0],
                     returnFaceId: true
                 }).then(function(response) {
 				   session.send('1'+response[0].faceId);
@@ -138,7 +138,7 @@ intents.matches('FindActivity', [
 			
             });
 			
-			*/
+			
 	
 	}
 ]);
@@ -176,7 +176,7 @@ function getSampleCardActions(session) {
 var async = require('async');
 var url = require('url');
 var request = require('request');
-
+var buffers = [];
 function downloadAttachments(session,connector, message, callback) {
     var attachments = [];
     var containsSkypeUrl = true;
@@ -192,7 +192,7 @@ function downloadAttachments(session,connector, message, callback) {
             }
         ], function (err, token) {
             if (!err) {
-                var buffers = [];
+                
 					session.send('token:'+token);
                     var contentUrl = message.contentUrl;
 					session.send('content url:'+contentUrl);
@@ -207,11 +207,11 @@ function downloadAttachments(session,connector, message, callback) {
                     }, function (err, res, body) {
                         if (!err && res.statusCode == 200) {
                             buffers.push(body);
-							console.log(body + 'BODY');
+						
 							//session.send(body);
                         }
                         cb(err);
-						console.log(res + 'Error');
+					
 						
                     });
                
