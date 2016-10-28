@@ -95,48 +95,9 @@ intents.matches('FindActivity', [
     //session.send(JSON.stringify(results.response));
 	session.send(uploadedImage.contentUrl);
 		
-		var extractedImage = downloadAttachments(session,connector,uploadedImage);
+	downloadAttachments(session,connector,uploadedImage);
 		
-		console.log('extractedImage: '+extractedImage);
-	
-	var detects = [];
-			
-			detects.push(client.face.detect({
-                    data: extractedImage,
-                    returnFaceId: true
-                }).then(function(response) {
-				   session.send('1'+response[0].faceId);
-                    checkFaces.push(response[0].faceId);
-                })
-            );
 
-            detects.push(client.face.detect({
-                    path: 'image/juface2.jpg',
-                    returnFaceId: true
-                }).then(function(response) {
-				   session.send('2'+response[0].faceId);
-                    checkFaces.push(response[0].faceId);
-                })
-            );
-			
-			
-			
-			
-			
-			_Promise.all(detects).then(function() {
-				
-				session.send('3'+JSON.stringify(checkFaces));
-					
-					
-					
-				client.face.verify(checkFaces).then(function (response) {
-					
-                session.send('4'+JSON.stringify(response));
-				
-				});	
-					
-			
-            });
 			
 			
 	
@@ -204,9 +165,8 @@ function downloadAttachments(session,connector, message, callback) {
                         headers: headers
                     }, function (err, res, body) {
                         if (!err && res.statusCode == 200) {
-                            return body;
+                            compareFaces(session, body);
 						
-							console.log(body+'BODY');
                         }
                         cb(err);
 					
@@ -220,4 +180,50 @@ function downloadAttachments(session,connector, message, callback) {
             }
         });
 
+}
+
+function compareFaces(session, faceToCompare){
+	
+		
+	
+	var detects = [];
+			
+			detects.push(client.face.detect({
+                    data: faceToCompare,
+                    returnFaceId: true
+                }).then(function(response) {
+				   session.send('1'+response[0].faceId);
+                    checkFaces.push(response[0].faceId);
+                })
+            );
+
+            detects.push(client.face.detect({
+                    path: 'image/juface2.jpg',
+                    returnFaceId: true
+                }).then(function(response) {
+				   session.send('2'+response[0].faceId);
+                    checkFaces.push(response[0].faceId);
+                })
+            );
+			
+			
+			
+			
+			
+			_Promise.all(detects).then(function() {
+				
+				session.send('3'+JSON.stringify(checkFaces));
+					
+					
+					
+				client.face.verify(checkFaces).then(function (response) {
+					
+                session.send('4'+JSON.stringify(response));
+				
+				});	
+					
+			
+            });
+	
+	
 }
