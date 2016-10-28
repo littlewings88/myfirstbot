@@ -170,7 +170,7 @@ function downloadAttachments(session,connector, message, callback) {
 						
                         }
                         cb(err);
-					
+					    console.log(err);
 						
                     });
                
