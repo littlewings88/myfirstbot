@@ -192,11 +192,9 @@ function downloadAttachments(session,connector, message, callback) {
             }
         ], function (err, token) {
             if (!err) {
-                
-					session.send('token:'+token);
+            
                     var contentUrl = message.contentUrl;
-					session.send('content url:'+contentUrl);
-                    var headers = {};
+				    var headers = {};
                    
                         headers['Authorization'] = 'Bearer ' + token;
                         headers['Content-Type'] = 'application/octet-stream';
@@ -208,7 +206,7 @@ function downloadAttachments(session,connector, message, callback) {
                         if (!err && res.statusCode == 200) {
                             buffers.push(body);
 						
-							//session.send(body);
+							console.log(body+'BODY');
                         }
                         cb(err);
 					
