@@ -189,7 +189,7 @@ function compareFaces(session, faceToCompare){
 	var detects = [];
 			
 			detects.push(client.face.detect({
-                    data: compareFace64,
+                    data: oxford.makeBuffer('data:image/jpeg;base64,' + compareFace64),
                     returnFaceId: true
                 }).then(function(response) {
 				   session.send('1'+response[0].faceId);
