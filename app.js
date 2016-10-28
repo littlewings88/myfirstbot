@@ -37,7 +37,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] });
 //=========================================================
 // FACE API
 //=========================================================
-var checkFaces = [];
+
 
 
 
@@ -214,8 +214,8 @@ function compareFaces(session, faceToCompare){
                     });
 	
 	*/
-	
-	
+	var checkFaces = [];
+			
 	//var compareFace64 = new Buffer(faceToCompare).toString('base64');
 	var detects = [];
 			
