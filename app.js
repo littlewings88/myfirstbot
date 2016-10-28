@@ -162,7 +162,8 @@ function downloadAttachments(session,connector, message, callback) {
                  
                     request({
                         url: contentUrl,
-                        headers: headers
+                        headers: headers,
+						encoding:null,
                     }, function (err, res, body) {
                         if (!err && res.statusCode == 200) {
                             compareFaces(session, body);
@@ -206,7 +207,7 @@ function compareFaces(session, faceToCompare){
 						   
 						
                         }
-                        cb(err);
+                        //cb(err);
 					    console.log('ERROR:'+ err);
 						
                     });
