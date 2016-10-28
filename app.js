@@ -95,14 +95,14 @@ intents.matches('FindActivity', [
     //session.send(JSON.stringify(results.response));
 	session.send(uploadedImage.contentUrl);
 		
-		downloadAttachments(session,connector,uploadedImage);
+		var extractedImage = downloadAttachments(session,connector,uploadedImage);
 		
-		console.log('buffer: '+buffers[0]);
+		console.log('extractedImage: '+extractedImage);
 	
 	var detects = [];
 			
 			detects.push(client.face.detect({
-                    url: buffers[0],
+                    data: extractedImage,
                     returnFaceId: true
                 }).then(function(response) {
 				   session.send('1'+response[0].faceId);
@@ -204,7 +204,7 @@ function downloadAttachments(session,connector, message, callback) {
                         headers: headers
                     }, function (err, res, body) {
                         if (!err && res.statusCode == 200) {
-                            buffers.push(body);
+                            return body;
 						
 							console.log(body+'BODY');
                         }
