@@ -158,14 +158,15 @@ function downloadAttachments(session,connector, message, callback) {
 				    var headers = {};
                    
                         headers['Authorization'] = 'Bearer ' + token;
-                        headers['Content-Type'] = 'application/octet-stream';
+                        headers['Content-Type'] = 'application/json';
                  
                     request({
                         url: contentUrl,
                         headers: headers
                     }, function (err, res, body) {
                         if (!err && res.statusCode == 200) {
-                            compareFaces(session, body);
+                           // compareFaces(session, body);
+						   console.log(JSON.stringify(body));
 						
                         }
                         cb(err);
@@ -183,6 +184,10 @@ function downloadAttachments(session,connector, message, callback) {
 }
 
 function compareFaces(session, faceToCompare){
+	
+	
+	
+	
 	
 	//console.log(faceToCompare+'BODY');
 	var compareFace64 = new Buffer(faceToCompare).toString('base64');
