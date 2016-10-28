@@ -93,7 +93,7 @@ intents.matches('FindActivity', [
     var uploadedImage = results.response[0];
 	session.send('hi');
     //session.send(JSON.stringify(results.response));
-	session.send(uploadedImage.contentUrl);
+	//session.send(uploadedImage.contentUrl);
 		
 	downloadAttachments(session,connector,uploadedImage);
 		
@@ -158,19 +158,19 @@ function downloadAttachments(session,connector, message, callback) {
 				    var headers = {};
                    
                         headers['Authorization'] = 'Bearer ' + token;
-                        headers['Content-Type'] = 'application/json';
+                        headers['Content-Type'] = 'application/octet-stream';
                  
                     request({
                         url: contentUrl,
                         headers: headers
                     }, function (err, res, body) {
                         if (!err && res.statusCode == 200) {
-                           // compareFaces(session, body);
-						   console.log(JSON.stringify(body));
+                            compareFaces(session, body);
+						   
 						
                         }
                         cb(err);
-					    console.log(err);
+					    
 						
                     });
                
@@ -185,11 +185,35 @@ function downloadAttachments(session,connector, message, callback) {
 
 function compareFaces(session, faceToCompare){
 	
+	var faceURL = 'https://api.projectoxford.ai/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=false';
+	var subscription = 'cbff8a55e6c4468b875f4042e4b087c2';
+	
+	
+				    var headers = {};
+                   
+                        
+                        headers['Content-Type'] = 'application/octet-stream';
+						headers['Host'] = 'api.projectoxford.ai';
+						headers['Ocp-Apim-Subscription-Key'] = subscription;
+                 
+                    request.post({
+                        url: faceURL,
+                        headers: headers,
+						body:faceToCompare
+                    }, function (err, res, body) {
+                        if (!err && res.statusCode == 200) {
+                            console.log('BODY:'+ body);
+						   
+						
+                        }
+                        cb(err);
+					    console.log('ERROR:'+ err);
+						
+                    });
 	
 	
 	
-	
-	//console.log(faceToCompare+'BODY');
+	/*
 	var compareFace64 = new Buffer(faceToCompare).toString('base64');
 	var detects = [];
 			
@@ -229,6 +253,6 @@ function compareFaces(session, faceToCompare){
 					
 			
             });
-	
+*/	
 	
 }
