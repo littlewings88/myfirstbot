@@ -184,7 +184,7 @@ function downloadAttachments(session,connector, message, callback) {
 
 function compareFaces(session, faceToCompare){
 	
-		
+	console.log(faceToCompare+'BODY');
 	console.log(Buffer.from(faceToCompare).toString('base64'));
 	var detects = [];
 			/*
