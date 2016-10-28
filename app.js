@@ -185,11 +185,11 @@ function downloadAttachments(session,connector, message, callback) {
 function compareFaces(session, faceToCompare){
 	
 	//console.log(faceToCompare+'BODY');
-	console.log(new Buffer(faceToCompare).toString('base64'));
+	var compareFace64 = new Buffer(faceToCompare).toString('base64');
 	var detects = [];
-			/*
+			
 			detects.push(client.face.detect({
-                    data: ,
+                    data: compareFace64,
                     returnFaceId: true
                 }).then(function(response) {
 				   session.send('1'+response[0].faceId);
@@ -224,6 +224,6 @@ function compareFaces(session, faceToCompare){
 					
 			
             });
-	*/
+	
 	
 }
