@@ -189,7 +189,7 @@ function compareFaces(session, faceToCompare){
 	var detects = [];
 			
 			detects.push(client.face.detect({
-                    data: Buffer.from(faceToCompare).toString('base64');,
+                    data: Buffer.from(faceToCompare).toString('base64'),
                     returnFaceId: true
                 }).then(function(response) {
 				   session.send('1'+response[0].faceId);
